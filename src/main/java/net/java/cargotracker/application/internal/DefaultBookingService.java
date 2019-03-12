@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
 import net.java.cargotracker.application.BookingService;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.CargoRepository;
@@ -28,24 +29,19 @@ public class DefaultBookingService implements BookingService {
     @Inject
     private RoutingService routingService;
     // TODO See if the logger can be injected.
-    private static final Logger logger = Logger.getLogger(
-            DefaultBookingService.class.getName());
+    private static final Logger logger = Logger.getLogger(DefaultBookingService.class.getName());
 
     @Override
-    public TrackingId bookNewCargo(UnLocode originUnLocode,
-            UnLocode destinationUnLocode,
-            Date arrivalDeadline) {
+    public TrackingId bookNewCargo(UnLocode originUnLocode, UnLocode destinationUnLocode, Date arrivalDeadline) {
         TrackingId trackingId = cargoRepository.nextTrackingId();
         Location origin = locationRepository.find(originUnLocode);
         Location destination = locationRepository.find(destinationUnLocode);
-        RouteSpecification routeSpecification = new RouteSpecification(origin,
-                destination, arrivalDeadline);
+        RouteSpecification routeSpecification = new RouteSpecification(origin, destination, arrivalDeadline);
 
         Cargo cargo = new Cargo(trackingId, routeSpecification);
 
         cargoRepository.store(cargo);
-        logger.log(Level.INFO, "Booked new cargo with tracking id {0}",
-                cargo.getTrackingId().getIdString());
+        logger.log(Level.INFO, "Booked new cargo with tracking id {0}", cargo.getTrackingId().getIdString());
 
         return cargo.getTrackingId();
     }
