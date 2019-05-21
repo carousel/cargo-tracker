@@ -1,18 +1,23 @@
 ## Cargo domain vocabulary
-
--   cargo
--   vessel
--   voyage
--   vessol voyage loop
--   route
--   itinerary (proposed)
--   leg
--   shipping
--   clerk
--   intermodal shipping
--   book
--   claim
--   layover time
+    cargo
+    vessel
+    voyage
+    vessol voyage loop
+    route
+    routing service
+    itinerary (proposed)
+    leg
+    shipping
+    clerk
+    intermodal shipping
+    book
+    book the cargo
+    claim
+    layover time
+    itinerary
+    sequence of legs
+    discrepancy
+    intricacy
 
 ### Aggregate represents technical issues, but are rooted deep into domain
 -   transaction boundaries (e.g. delayed cargos are locked, locked cargos can't be re-routed)
